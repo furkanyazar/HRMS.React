@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Icon, Menu, Table, Button } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
@@ -17,21 +18,25 @@ export default function JobList() {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Job Name</Table.HeaderCell>
-            <Table.HeaderCell>Description</Table.HeaderCell>
-            <Table.HeaderCell>City</Table.HeaderCell>
-            <Table.HeaderCell>Detail</Table.HeaderCell>
+            <Table.HeaderCell>Pozisyon</Table.HeaderCell>
+            <Table.HeaderCell>Şirket</Table.HeaderCell>
+            <Table.HeaderCell>Şehir</Table.HeaderCell>
+            <Table.HeaderCell>Detaylar</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-        {jobPostings.map((jobPosting) => (
-          <Table.Row key={jobPosting.id}>
-            <Table.Cell>{jobPosting.job.name}</Table.Cell>
-            <Table.Cell>{jobPosting.description}</Table.Cell>
-            <Table.Cell>{jobPosting.city.name}</Table.Cell>
-            <Table.Cell><Button active>View Detail</Button></Table.Cell>
-          </Table.Row>
+          {jobPostings.map((jobPosting) => (
+            <Table.Row key={jobPosting.id}>
+              <Table.Cell>{jobPosting.job.name}</Table.Cell>
+              <Table.Cell>{jobPosting.user.companyName}</Table.Cell>
+              <Table.Cell>{jobPosting.city.name}</Table.Cell>
+              <Table.Cell>
+                <Button as={Link} to={"/jobdetail/" + jobPosting.id}>
+                  Detayları Gör
+                </Button>
+              </Table.Cell>
+            </Table.Row>
           ))}
         </Table.Body>
 
