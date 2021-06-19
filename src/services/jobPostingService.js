@@ -2,11 +2,19 @@ import axios from "axios";
 
 export default class JobPostingService {
   add(values) {
-    return axios.get("http://localhost:8080/api/jobPostings/add", values);
+    return axios.post("http://localhost:8080/api/jobPostings/add", values);
+  }
+
+  setIsActivated(id) {
+    return axios.post("http://localhost:8080/api/jobPostings/setIsActivated?id=" + id + "&isActivated=true");
+  }
+
+  getIsNotActiveJobPostings() {
+    return axios.get("http://localhost:8080/api/jobPostings/getByIsActivated?isActivated=false")
   }
 
   getJobPostings() {
-    return axios.get("http://localhost:8080/api/jobPostings/getByIsActivated");
+    return axios.get("http://localhost:8080/api/jobPostings/getByIsActivated?isActivated=true");
   }
 
   getJobById(id) {

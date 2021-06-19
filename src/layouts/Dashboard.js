@@ -9,6 +9,7 @@ import Side from "./Side";
 import Employers from "../pages/Employers";
 import Employees from "../pages/Employees";
 import NewJobPosting from "../pages/NewJobPosting";
+import ActiveJobPosts from "../pages/ActiveJobPosts";
 
 export default function Dashboard() {
   return (
@@ -25,6 +26,7 @@ export default function Dashboard() {
           <Route exact path="/employees" component={Employees} />
           <Route exact path="/employeedetail/:id" component={EmployeeDetail} />
           <Route exact path="/newjobposting" component={NewJobPosting} />
+          <Route exact path="/activejobposts" component={ActiveJobPosts} />
         </Grid.Column>
       </Grid>
     </div>

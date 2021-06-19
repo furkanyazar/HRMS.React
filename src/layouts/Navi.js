@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Container, Icon, Menu } from "semantic-ui-react";
-import EmployerSignedOut from "./EmployerSignedOut";
 import SignedIn from "./SignedIn";
 import SignedOut from "./SignedOut";
 
@@ -26,7 +25,8 @@ export default function Navi() {
             <Icon name="building outline" />
             HRMS
           </Menu.Item>
-          <Menu.Item name="ana sayfa" as={NavLink} to={"/"} />
+          <Menu.Item name="ana sayfa" as={Link} to={"/"} />
+          <Menu.Item name="iş ilanlarını onayla" as={Link} to={"/activejobposts"} />
 
           <Menu.Menu position="right">
             {isAuthenticated ? (
