@@ -54,7 +54,7 @@ export default function NewJobPosting() {
 
   return (
     <div>
-      <Form onSubmit={formik.handleSubmit}>
+      <Form>
         <Form.Group widths="equal">
           <Form.Input fluid label="Maaş aralığı" placeholder="Maaş aralığı" />
           <Form.Select
