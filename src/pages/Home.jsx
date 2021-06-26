@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Icon, Menu, Table, Button } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
-export default function JobList() {
+export default function Home() {
   const [jobPostings, setJobPostings] = useState([]);
 
   useEffect(() => {

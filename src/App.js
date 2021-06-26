@@ -7,7 +7,7 @@ import Dashboard from "./layouts/Dashboard";
 function App() {
   return (
     <div className="App">
-      <Navi/>
+      <Navi />
       <Container className="main">
         <Dashboard />
       </Container>

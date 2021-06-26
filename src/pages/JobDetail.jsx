@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import { Button, Card, Grid, Header, Icon, Table } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
-import { formatDate } from '../functions';
+import { formatDate } from "../functions";
 
 export default function JobDetail() {
   let { id } = useParams();
@@ -132,8 +132,13 @@ export default function JobDetail() {
                   </Table.Row>
 
                   <Table.Row>
-                    <Table.Cell>Maaş Aralığı</Table.Cell>
-                    <Table.Cell>{jobAd.salaryRange}</Table.Cell>
+                    <Table.Cell>Minimum Maaş</Table.Cell>
+                    <Table.Cell>{jobAd.minSalary}</Table.Cell>
+                  </Table.Row>
+
+                  <Table.Row>
+                    <Table.Cell>Maximum Maaş</Table.Cell>
+                    <Table.Cell>{jobAd.maxSalary}</Table.Cell>
                   </Table.Row>
 
                   <Table.Row>

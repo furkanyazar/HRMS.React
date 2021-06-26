@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Button, Card, Header, Icon, Table } from "semantic-ui-react";
-import EmployerService from "../services/employerService";
+import UserService from "../services/userService";
 import JobPostingService from "../services/jobPostingService";
 
 export default function EmployerDetail() {
@@ -11,15 +11,15 @@ export default function EmployerDetail() {
   const [jobAds, setJobAds] = useState([]);
 
   useEffect(() => {
-    let employerService = new EmployerService();
+    let userService = new UserService();
     let jobPostingService = new JobPostingService();
 
-    employerService
+    userService
       .getEmployerById(id)
       .then((result) => setEmployer(result.data.data));
 
     jobPostingService
-      .getByIsActicatedAndUserId(id)
+      .getByIsActivatedAndUserId(id)
       .then((result) => setJobAds(result.data.data));
   }, [id]);
 

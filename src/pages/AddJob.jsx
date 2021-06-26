@@ -12,26 +12,26 @@ import JobPostingService from "../services/jobPostingService";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
-export default function NewJobPosting() {
+export default function AddJob() {
+  const { userItems } = useSelector((state) => state.user);
   let jobPostingService = new JobPostingService();
+  const history = useHistory();
 
   const jobPostingSchema = Yup.object().shape({
-    lastDate: Yup.date()
-      .nullable()
-      .required("Bu alanın doldurulması zorunludur"),
-    description: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    job: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    workingTime: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    workplace: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    lastDate: Yup.date().nullable().required("Son başvuru tarihi zorunlu"),
+    description: Yup.string().required("Açıklama zorunlu"),
+    job: Yup.string().required("İş pozisyonu zorunlu"),
+    workingTime: Yup.string().required("Çalışma süresi zorunlu"),
+    workplace: Yup.string().required("Çalışma yeri zorunlu"),
     openPosition: Yup.string()
-      .required("Posizyon sayısı zorunludur")
-      .min(1, "Posizyon sayısı 1 den küçük olamaz"),
-    city: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    salaryRange: Yup.string().required("Bu alanın doldurulması zorunludur"),
+      .required("Posizyon sayısı zorunlu")
+      .min(1, "Posizyon sayısı 1'den küçük"),
+    city: Yup.string().required("Şehir zorunlu"),
+    minSalary: Yup.string(),
+    maxSalary: Yup.string(),
   });
-
-  const history = useHistory();
 
   const formik = useFormik({
     initialValues: {
@@ -41,27 +41,29 @@ export default function NewJobPosting() {
       workplace: "",
       openPosition: "",
       city: "",
-      salaryRange: "",
+      minSalary: "",
+      maxSalary: "",
       lastDate: "",
     },
     validationSchema: jobPostingSchema,
     onSubmit: (values) => {
       let postModel = {
-        user: { id: 1 },
+        user: { id: userItems[0].user.user.id },
         city: { id: values.city },
         job: { id: values.job },
         workingTime: { id: values.workingTime },
         workplace: { id: values.workplace },
         description: values.description,
         openPosition: values.openPosition,
-        salaryRange: values.salaryRange,
+        minSalary: values.minSalary,
+        maxSalary: values.maxSalary,
         lastDate: values.lastDate,
         isActivated: false,
-      }
+      };
       jobPostingService
         .add(postModel)
         .then((result) => console.log(result.data.data));
-      alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+      alert("İş ilanı eklendi");
       history.push("/");
     },
   });
@@ -124,11 +126,11 @@ export default function NewJobPosting() {
         <Card.Content>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Field style={{ marginBottom: "1rem" }}>
-              <label>İş Posisyonu</label>
+              <label>İş Pozisyonu</label>
               <Dropdown
                 clearable
                 item
-                placeholder="İş pozisyonu"
+                placeholder="İş Pozisyonu"
                 search
                 selection
                 onChange={(event, data) =>
@@ -168,11 +170,11 @@ export default function NewJobPosting() {
               )}
             </Form.Field>
             <Form.Field>
-              <label>Çalışma yeri</label>
+              <label>Çalışma Yeri</label>
               <Dropdown
                 clearable
                 item
-                placeholder="Çalışma yeri"
+                placeholder="Çalışma Yeri"
                 search
                 selection
                 onChange={(event, data) =>
@@ -213,30 +215,45 @@ export default function NewJobPosting() {
             </Form.Field>
             <Form.Field>
               <Grid stackable>
-                <Grid.Column width={16}>
-                  <label style={{ fontWeight: "bold" }}>Maaş aralığı</label>
+                <Grid.Column width={8}>
+                  <label style={{ fontWeight: "bold" }}>En Az Maaş</label>
                   <Input
-                    type="text"
-                    placeholder="Maaş aralığı"
-                    value={formik.values.salaryRange}
-                    name="salaryRange"
+                    type="number"
+                    placeholder="En Az Maaş"
+                    value={formik.values.minSalary}
+                    name="minSalary"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
                   ></Input>
-                  {formik.errors.salaryRange && formik.touched.salaryRange && (
+                  {formik.errors.minSalary && formik.touched.minSalary && (
                     <div className={"ui pointing red basic label"}>
-                      {formik.errors.salaryRange}
+                      {formik.errors.minSalary}
+                    </div>
+                  )}
+                </Grid.Column>
+                <Grid.Column width={8}>
+                  <label style={{ fontWeight: "bold" }}>En Fazla Maaş</label>
+                  <Input
+                    type="number"
+                    placeholder="En Fazla Maaş"
+                    value={formik.values.maxSalary}
+                    name="maxSalary"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                  ></Input>
+                  {formik.errors.maxSalary && formik.touched.maxSalary && (
+                    <div className={"ui pointing red basic label"}>
+                      {formik.errors.maxSalary}
                     </div>
                   )}
                 </Grid.Column>
               </Grid>
             </Form.Field>
-
             <Form.Field>
               <Grid stackable>
                 <Grid.Column width={8}>
                   <label style={{ fontWeight: "bold" }}>
-                    Açık Posisyon sayısı
+                    Açık Pozisyon Sayısı
                   </label>
                   <Input
                     style={{ width: "100%" }}
@@ -247,7 +264,7 @@ export default function NewJobPosting() {
                     value={formik.values.openPosition}
                     onBlur={formik.handleBlur}
                     type="number"
-                    placeholder="Açık Posisyon sayısı"
+                    placeholder="Açık Pozisyon Sayısı"
                   />
                   {formik.errors.openPosition &&
                     formik.touched.openPosition && (
@@ -258,7 +275,7 @@ export default function NewJobPosting() {
                 </Grid.Column>
                 <Grid.Column width={8}>
                   <label style={{ fontWeight: "bold" }}>
-                    Son başvuru tarihi
+                    Son Başvuru Tarihi
                   </label>
                   <Input
                     style={{ width: "100%" }}
@@ -270,7 +287,7 @@ export default function NewJobPosting() {
                     value={formik.values.lastDate}
                     onBlur={formik.handleBlur}
                     name="lastDate"
-                    placeholder="Son başvuru tarihi"
+                    placeholder="Son Başvuru Tarihi"
                   />
                   {formik.errors.lastDate && formik.touched.lastDate && (
                     <div className={"ui pointing red basic label"}>

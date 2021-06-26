@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Button, Menu } from "semantic-ui-react";
 
 export default function SignedOut({ signIn }) {
@@ -7,14 +8,20 @@ export default function SignedOut({ signIn }) {
       <Menu inverted>
         <Menu.Item>
           <Button.Group>
-            <Button onClick={signIn}>Firma Girişi</Button>
+            <Button as={Link} to="/employerlogin">
+              Firma Girişi
+            </Button>
           </Button.Group>
         </Menu.Item>
         <Menu.Item>
           <Button.Group>
-            <Button primary>Kayıt Ol</Button>
+            <Button primary as={Link} to="/userregister">
+              Kayıt Ol
+            </Button>
             <Button.Or />
-            <Button positive>Giriş Yap</Button>
+            <Button positive as={Link} to="/userlogin">
+              Giriş Yap
+            </Button>
           </Button.Group>
         </Menu.Item>
       </Menu>

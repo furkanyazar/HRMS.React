@@ -1,23 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Icon, Menu, Table, Button } from "semantic-ui-react";
-import JobPostingService from "../services/jobPostingService";
+import UserService from "../services/userService";
 
-export default function ActiveJobPosts() {
-  let jobPostingService = new JobPostingService();
-  const [jobPostings, setJobPostings] = useState([]);
-  const history = useHistory();
-
-  function activateJob(id) {
-    jobPostingService.setIsActivated(id);
-    alert("İlan onaylandı");
-    history.push("/");
-  }
-
+export default function ConfirmEmployers() {
+  let userService = new UserService();
+  const [employers, setEmployers] = useState([]);
+  
   useEffect(() => {
-    jobPostingService
-      .getIsNotActiveJobPostings()
-      .then((result) => setJobPostings(result.data.data));
+    userService
+      .getIsNotActiveEmployers()
+      .then((result) => setEmployers(result.data.data));
   }, []);
 
   return (
@@ -25,22 +18,22 @@ export default function ActiveJobPosts() {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Pozisyon</Table.HeaderCell>
-            <Table.HeaderCell>Şirket</Table.HeaderCell>
-            <Table.HeaderCell>Şehir</Table.HeaderCell>
+            <Table.HeaderCell>Şirket Adı</Table.HeaderCell>
+            <Table.HeaderCell>E-posta</Table.HeaderCell>
+            <Table.HeaderCell>Telefon</Table.HeaderCell>
             <Table.HeaderCell>Detaylar</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
         <Table.Body>
-          {jobPostings.map((jobPosting) => (
-            <Table.Row key={jobPosting.id}>
-              <Table.Cell>{jobPosting.job.name}</Table.Cell>
-              <Table.Cell>{jobPosting.user.companyName}</Table.Cell>
-              <Table.Cell>{jobPosting.city.name}</Table.Cell>
+          {employers.map((employer) => (
+            <Table.Row key={employer.id}>
+              <Table.Cell>{employer.user.companyName}</Table.Cell>
+              <Table.Cell>{employer.user.email}</Table.Cell>
+              <Table.Cell>{employer.user.phoneNumber}</Table.Cell>
               <Table.Cell>
-                <Button onClick={() => activateJob(jobPosting.id)}>
-                  Onayla
+                <Button as={Link} to={"/confirmemployersdetail/" + employer.user.id}>
+                  Detaylar
                 </Button>
               </Table.Cell>
             </Table.Row>

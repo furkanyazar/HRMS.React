@@ -4,24 +4,32 @@ export default class JobPostingService {
   add(values) {
     return axios.post("http://localhost:8080/api/jobPostings/add", values);
   }
-
+  
   setIsActivated(id) {
-    return axios.post("http://localhost:8080/api/jobPostings/setIsActivated?id=" + id + "&isActivated=true");
+    return axios.post(
+      "http://localhost:8080/api/jobPostings/setIsActivated?id=" +
+        id +
+        "&isActivated=true"
+    );
   }
 
   getIsNotActiveJobPostings() {
-    return axios.get("http://localhost:8080/api/jobPostings/getByIsActivated?isActivated=false")
-  }
-
-  getJobPostings() {
-    return axios.get("http://localhost:8080/api/jobPostings/getByIsActivated?isActivated=true");
+    return axios.get(
+      "http://localhost:8080/api/jobPostings/getByIsActivated?isActivated=false"
+    );
   }
 
   getJobById(id) {
     return axios.get("http://localhost:8080/api/jobPostings/getById?id=" + id);
   }
 
-  getByIsActicatedAndUserId(id) {
+  getJobPostings() {
+    return axios.get(
+      "http://localhost:8080/api/jobPostings/getByIsActivated?isActivated=true"
+    );
+  }
+
+  getByIsActivatedAndUserId(id) {
     return axios.get(
       "http://localhost:8080/api/jobPostings/getByIsActivatedAndUserId?userId=" +
         id
