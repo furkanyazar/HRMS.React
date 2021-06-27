@@ -39,7 +39,7 @@ export default function AddJob() {
       job: "",
       workingTime: "",
       workplace: "",
-      openPosition: "",
+      openPosition: "1",
       city: "",
       minSalary: "",
       maxSalary: "",

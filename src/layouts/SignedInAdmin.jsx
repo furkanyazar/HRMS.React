@@ -1,16 +1,28 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import { Dropdown, Image, Menu } from "semantic-ui-react";
 import { useDispatch, useSelector } from "react-redux";
 import { logOut } from "../store/actions/userActions";
+import UserService from "../services/userService";
 
 export default function SignedInAdmin() {
+  let userService = new UserService();
+  const history = useHistory();
+
+  const [photos, setPhotos] = useState({});
   const { userItems } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
     dispatch(logOut());
+    history.push("/");
   };
+
+  useEffect(() => {
+    userService
+      .getPhotosByUser(userItems[0].user.id)
+      .then((result) => setPhotos(result.data.data));
+  }, [userItems[0].user.id]);
 
   return (
     <div>
@@ -18,12 +30,18 @@ export default function SignedInAdmin() {
         <Image
           avatar
           spaced="right"
-          src="https://i.pinimg.com/originals/b3/5f/c7/b35fc7144c81956c683df40833b87469.jpg"
+          src={photos.photoLink}
+          circular
+          key={photos.id}
         />
         <Dropdown pointing="top right" text={userItems[0].user.name}>
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={"/"} text="Bilgilerim" icon="info" />
-            <Dropdown.Item onClick={() => handleLogOut()} text="Çıkış Yap" icon="sign-out" />
+            <Dropdown.Item as={Link} to={"/admindetail/" + userItems[0].user.id} text="Bilgilerim" icon="info" />
+            <Dropdown.Item
+              onClick={() => handleLogOut()}
+              text="Çıkış Yap"
+              icon="sign-out"
+            />
           </Dropdown.Menu>
         </Dropdown>
       </Menu.Item>

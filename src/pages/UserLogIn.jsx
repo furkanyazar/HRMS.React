@@ -18,8 +18,8 @@ export default function UserLogIn() {
   };
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: "user@mail.com",
+    password: "12345678",
   };
 
   const schema = Yup.object({
@@ -38,7 +38,6 @@ export default function UserLogIn() {
           userService.logInUser(values).then((result) => {
             if (result.data.data != null) {
               handleUserLogIn(result.data.data);
-              alert("Giriş başarılı");
               history.push("/");
             } else {
               alert("Hatalı giriş");

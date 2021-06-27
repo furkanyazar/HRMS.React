@@ -18,8 +18,8 @@ export default function EmployerLogIn() {
   };
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: "company@mail.com",
+    password: "12345678",
   };
 
   const schema = Yup.object({
@@ -38,7 +38,6 @@ export default function EmployerLogIn() {
           userService.logInEmployer(values).then((result) => {
             if (result.data.data != null) {
               handleEmployerLogIn(result.data.data);
-              alert("Giriş başarılı");
               history.push("/");
             } else {
               alert("Hatalı giriş");

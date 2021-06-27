@@ -6,9 +6,11 @@ import { useSelector } from "react-redux";
 import SignedInAdmin from "./SignedInAdmin";
 import SignedInEmployer from "./SignedInEmployer";
 import SignedInUser from "./SignedInUser";
+import Favs from "./Favs";
 
 export default function Navi() {
   const { userItems } = useSelector((state) => state.user);
+  const { favItems } = useSelector((state) => state.fav);
 
   return (
     <div>
@@ -20,11 +22,24 @@ export default function Navi() {
               HRMS
             </Menu.Item>
             <Menu.Item name="ana sayfa" as={Link} to={"/"} />
-            {userItems[0].type === "admin" && <Menu.Item name="onay bekleyen ilanlar" as={Link} to={"/confirmads"} />}
-            {userItems[0].type === "admin" && <Menu.Item name="onay bekleyen firmalar" as={Link} to={"/confirmemployers"}/>}
+            {userItems[0].type === "admin" && (
+              <Menu.Item
+                name="onay bekleyen ilanlar"
+                as={Link}
+                to={"/confirmads"}
+              />
+            )}
+            {userItems[0].type === "admin" && (
+              <Menu.Item
+                name="onay bekleyen firmalar"
+                as={Link}
+                to={"/confirmemployers"}
+              />
+            )}
           </Menu.Menu>
 
           <Menu.Menu position="right">
+            {favItems.length > 0 && userItems[0].type === "user" && <Favs />}
             {userItems[0].type === "admin" && <SignedInAdmin />}
             {userItems[0].type === "employer" && <SignedInEmployer />}
             {userItems[0].type === "user" && <SignedInUser />}

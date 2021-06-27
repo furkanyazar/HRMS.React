@@ -51,4 +51,8 @@ export default class JobPostingService {
   getAllJobPositions() {
     return axios.get("http://localhost:8080/api/jobs/getall");
   }
+
+  addToFav(jobPostingId, userId) {
+    return axios.post("http://localhost:8080/api/favorites/add?jobPostingId=" + jobPostingId + "&userId=" + userId);
+  }
 }

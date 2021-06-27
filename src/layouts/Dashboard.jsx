@@ -2,16 +2,24 @@ import React from "react";
 import { Route } from "react-router";
 import { Grid } from "semantic-ui-react";
 import AddJob from "../pages/AddJob";
+import AdminDetail from "../pages/AdminDetail";
 import AdminLogIn from "../pages/AdminLogIn";
 import ConfirmAds from "../pages/ConfirmAds";
 import ConfirmAdsDetail from "../pages/ConfirmAdsDetail";
 import ConfirmEmployers from "../pages/ConfirmEmployers";
 import ConfirmEmployersDetail from "../pages/ConfirmEmployersDetail";
+import EditAdminDetail from "../pages/EditAdminDetail";
+import EditAdminPassword from "../pages/EditAdminPassword";
+import EditEmployerDetail from "../pages/EditEmployerDetail";
+import EditEmployerPassword from "../pages/EditEmployerPassword";
+import EditUserDetail from "../pages/EditUserDetail";
+import EditUserPassword from "../pages/EditUserPassword";
 import EmployerDetail from "../pages/EmployerDetail";
 import EmployerLogIn from "../pages/EmployerLogIn";
 import EmployerRegister from "../pages/EmployerRegister";
 import Home from "../pages/Home";
 import JobDetail from "../pages/JobDetail";
+import UserDetail from "../pages/UserDetail";
 import UserLogIn from "../pages/UserLogIn";
 import UserRegister from "../pages/UserRegister";
 
@@ -33,6 +41,14 @@ export default function Dashboard() {
           <Route exact path="/confirmemployers" component={ConfirmEmployers} />
           <Route exact path="/confirmemployersdetail/:id" component={ConfirmEmployersDetail} />
           <Route exact path="/addjob" component={AddJob} />
+          <Route exact path="/userdetail/:id" component={UserDetail} />
+          <Route exact path="/edituserdetail/:id" component={EditUserDetail} />
+          <Route exact path="/admindetail/:id" component={AdminDetail} />
+          <Route exact path="/editemployerdetail/:id" component={EditEmployerDetail} />
+          <Route exact path="/editadmindetail/:id" component={EditAdminDetail} />
+          <Route exact path="/editadminpassword/:id" component={EditAdminPassword} />
+          <Route exact path="/edituserpassword/:id" component={EditUserPassword} />
+          <Route exact path="/editemployerpassword/:id" component={EditEmployerPassword} />
         </Grid.Column>
       </Grid>
     </div>

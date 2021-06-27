@@ -4,14 +4,25 @@ import { Link } from "react-router-dom";
 import { Button, Card, Grid, Header, Icon, Table } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 import { formatDate } from "../functions";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFav } from "../store/actions/favActions";
 
 export default function JobDetail() {
   let { id } = useParams();
+  let jobPostingService = new JobPostingService();
 
   const [jobAd, setJobAd] = useState({});
+  const { userItems } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const handleAddToFav = (jobAd) => {
+    dispatch(addToFav(jobAd));
+    jobPostingService.addToFav(id, userItems[0].user.id).then((result) => {
+      alert(result.data.message);
+    })
+  };
 
   useEffect(() => {
-    let jobPostingService = new JobPostingService();
     jobPostingService
       .getJobById(id)
       .then((result) => setJobAd(result.data.data));
@@ -80,6 +91,24 @@ export default function JobDetail() {
                     <Table.Cell>{jobAd.user?.website}</Table.Cell>
                   </Table.Row>
 
+                  {userItems[0].type === "user" && (
+                    <Table.Row textAlign={"left"}>
+                      <Table.Cell>
+                        <Header as="h4" image>
+                          <Header.Content>
+                            <Icon name="favorite" />
+                            Favori
+                          </Header.Content>
+                        </Header>
+                      </Table.Cell>
+                      <Table.Cell>
+                        <Button primary onClick={() => handleAddToFav(jobAd)}>
+                          <Button.Content>Favorilere Ekle</Button.Content>
+                        </Button>
+                      </Table.Cell>
+                    </Table.Row>
+                  )}
+
                   <Table.Row textAlign={"left"}>
                     <Table.Cell>
                       <Header as="h4" image>
@@ -91,6 +120,7 @@ export default function JobDetail() {
                     </Table.Cell>
                     <Table.Cell>
                       <Button
+                        secondary
                         as={Link}
                         to={"/employerdetail/" + jobAd.user?.id}
                       >

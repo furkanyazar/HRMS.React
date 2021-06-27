@@ -18,8 +18,8 @@ export default function AdminLogIn() {
   };
 
   const initialValues = {
-    email: "",
-    password: "",
+    email: "admin@mail.com",
+    password: "12345678",
   };
 
   const schema = Yup.object({
@@ -37,8 +37,7 @@ export default function AdminLogIn() {
         onSubmit={(values) => {
           userService.logInAdmin(values).then((result) => {
             if (result.data.data != null) {
-              handleAdminLogIn(result.data.data)
-              alert("Giriş başarılı");
+              handleAdminLogIn(result.data.data);
               history.push("/");
             } else {
               alert("Hatalı giriş");
