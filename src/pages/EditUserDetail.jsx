@@ -16,10 +16,10 @@ export default function EditUserDetail() {
   const history = useHistory();
 
   const initialValues = {
-    name: userItems[0].user.name,
-    surname: userItems[0].user.surname,
-    dateOfBirth: formatDate2(userItems[0].user.dateOfBirth),
-    email: userItems[0].user.email,
+    name: userItems.user.name,
+    surname: userItems.user.surname,
+    dateOfBirth: formatDate2(userItems.user.dateOfBirth),
+    email: userItems.user.email,
     githubLink: "",
     linkedinLink: "",
     coverLetter: "",
@@ -46,7 +46,7 @@ export default function EditUserDetail() {
           userService
             .editEmployee(
               values,
-              userItems[0].user.id,
+              userItems.user.id,
               values.coverLetter,
               values.githubLink,
               values.linkedinLink
@@ -54,7 +54,7 @@ export default function EditUserDetail() {
             .then((result) => {
               alert(result.data.message);
               if (result.data.success) {
-                history.push("/userdetail/" + userItems[0].user.id);
+                history.push("/userdetail/" + userItems.user.id);
               }
             });
         }}

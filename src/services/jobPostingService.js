@@ -55,4 +55,13 @@ export default class JobPostingService {
   addToFav(jobPostingId, userId) {
     return axios.post("http://localhost:8080/api/favorites/add?jobPostingId=" + jobPostingId + "&userId=" + userId);
   }
+
+  removeFromFav(jobPostingId, userId) {
+    return axios.post("http://localhost:8080/api/favorites/remove?jobPostingId=" + jobPostingId + "&userId=" + userId);
+  }
+
+  getFavs(userId) {
+    return axios.get("http://localhost:8080/api/favorites/getfavs?id=" + userId);
+  }
+
 }

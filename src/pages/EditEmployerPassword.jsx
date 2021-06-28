@@ -30,14 +30,14 @@ export default function EditEmployerPassword() {
         onSubmit={(values) => {
           userService
             .setNewPassword(
-              userItems[0].user.id,
+              userItems.user.id,
               values.oldPassword,
               values.newPassword
             )
             .then((result) => {
               alert(result.data.message);
               if (result.data.success) {
-                history.push("/employerdetail/" + userItems[0].user.id);
+                history.push("/employerdetail/" + userItems.user.id);
               }
             });
         }}

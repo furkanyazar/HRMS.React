@@ -22,14 +22,14 @@ export default function Navi() {
               HRMS
             </Menu.Item>
             <Menu.Item name="ana sayfa" as={Link} to={"/"} />
-            {userItems[0].type === "admin" && (
+            {userItems.type === "admin" && (
               <Menu.Item
                 name="onay bekleyen ilanlar"
                 as={Link}
                 to={"/confirmads"}
               />
             )}
-            {userItems[0].type === "admin" && (
+            {userItems.type === "admin" && (
               <Menu.Item
                 name="onay bekleyen firmalar"
                 as={Link}
@@ -39,11 +39,11 @@ export default function Navi() {
           </Menu.Menu>
 
           <Menu.Menu position="right">
-            {favItems.length > 0 && userItems[0].type === "user" && <Favs />}
-            {userItems[0].type === "admin" && <SignedInAdmin />}
-            {userItems[0].type === "employer" && <SignedInEmployer />}
-            {userItems[0].type === "user" && <SignedInUser />}
-            {userItems[0].type === "logout" && <SignedOut />}
+            {favItems.length > 0 && userItems.type === "user" && <Favs />}
+            {userItems.type === "admin" && <SignedInAdmin />}
+            {userItems.type === "employer" && <SignedInEmployer />}
+            {userItems.type === "user" && <SignedInUser />}
+            {userItems.type === "logout" && <SignedOut />}
           </Menu.Menu>
         </Container>
       </Menu>

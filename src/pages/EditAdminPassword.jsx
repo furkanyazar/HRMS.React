@@ -30,14 +30,14 @@ export default function EditAdminPassword() {
         onSubmit={(values) => {
           userService
             .setNewPassword(
-              userItems[0].user.id,
+              userItems.user.id,
               values.oldPassword,
               values.newPassword
             )
             .then((result) => {
               alert(result.data.message);
               if (result.data.success) {
-                history.push("/admindetail/" + userItems[0].user.id);
+                history.push("/admindetail/" + userItems.user.id);
               }
             });
         }}

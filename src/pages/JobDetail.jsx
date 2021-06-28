@@ -17,7 +17,7 @@ export default function JobDetail() {
 
   const handleAddToFav = (jobAd) => {
     dispatch(addToFav(jobAd));
-    jobPostingService.addToFav(id, userItems[0].user.id).then((result) => {
+    jobPostingService.addToFav(id, userItems.user.id).then((result) => {
       alert(result.data.message);
     })
   };
@@ -91,7 +91,7 @@ export default function JobDetail() {
                     <Table.Cell>{jobAd.user?.website}</Table.Cell>
                   </Table.Row>
 
-                  {userItems[0].type === "user" && (
+                  {userItems.type === "user" && (
                     <Table.Row textAlign={"left"}>
                       <Table.Cell>
                         <Header as="h4" image>

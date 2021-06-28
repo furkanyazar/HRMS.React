@@ -1,6 +1,30 @@
 import axios from "axios";
 
 export default class UserService {
+  addEducation(values) {
+    return axios.post("http://localhost:8080/api/educations/add", values);
+  }
+
+  addLanguage(values) {
+    return axios.post("http://localhost:8080/api/knownlanguages/add", values);
+  }
+
+  addSkill(values) {
+    return axios.post("http://localhost:8080/api/ownedskills/add", values);
+  }
+
+  deleteEducation(id) {
+    return axios.post("http://localhost:8080/api/educations/remove?id=" + id)
+  }
+
+  deleteLanguage(id) {
+    return axios.post("http://localhost:8080/api/knownlanguages/remove?id=" + id)
+  }
+
+  deleteSkill(id) {
+    return axios.post("http://localhost:8080/api/ownedskills/remove?id=" + id)
+  }
+
   logInAdmin(values) {
     return axios.get(
       "http://localhost:8080/api/staffs/findbyemailandpassword?email=" +
@@ -142,5 +166,21 @@ export default class UserService {
     return axios.get(
       "http://localhost:8080/api/photos/findByUserId?userId=" + id
     );
+  }
+
+  getSchools() {
+    return axios.get("http://localhost:8080/api/schools/findall");
+  }
+
+  getDepartments() {
+    return axios.get("http://localhost:8080/api/departments/findall");
+  }
+
+  getLanguages() {
+    return axios.get("http://localhost:8080/api/languages/findall");
+  }
+
+  getSkills() {
+    return axios.get("http://localhost:8080/api/skills/findall");
   }
 }

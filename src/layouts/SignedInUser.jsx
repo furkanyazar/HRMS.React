@@ -20,9 +20,9 @@ export default function SignedInUser() {
 
   useEffect(() => {
     userService
-      .getPhotosByUser(userItems[0].user.id)
+      .getPhotosByUser(userItems.user.id)
       .then((result) => setPhotos(result.data.data));
-  }, [userItems[0].user.id]);
+  }, [userItems.user.id]);
 
   return (
     <div>
@@ -34,9 +34,9 @@ export default function SignedInUser() {
           circular
           key={photos.id}
         />
-        <Dropdown pointing="top right" text={userItems[0].user.name}>
+        <Dropdown pointing="top right" text={userItems.user.name}>
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={"/userdetail/" + userItems[0].user.id} text="Özgeçmişim" icon="wait" />
+            <Dropdown.Item as={Link} to={"/userdetail/" + userItems.user.id} text="Özgeçmişim" icon="wait" />
             <Dropdown.Item onClick={() => handleLogOut()} text="Çıkış Yap" icon="sign-out" />
           </Dropdown.Menu>
         </Dropdown>

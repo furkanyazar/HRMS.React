@@ -56,8 +56,8 @@ export default function EmployerDetail() {
           </Card.Meta>
         </Grid.Column>
         <Grid.Column width={4}>
-          {userItems[0].type === "employer" &&
-            employer.id === userItems[0].user.user.id && (
+          {userItems.type === "employer" &&
+            employer.id === userItems.user.user.id && (
               <Button
                 color="yellow"
                 floated="right"
@@ -125,8 +125,8 @@ export default function EmployerDetail() {
             </Table.Cell>
             <Table.Cell>{employer.phoneNumber}</Table.Cell>
           </Table.Row>
-          {userItems[0].type === "employer" &&
-            employer.id === userItems[0].user.user.id && (
+          {userItems.type === "employer" &&
+            employer.id === userItems.user.user.id && (
               <Table.Row>
                 <Table.Cell>
                   <Header as="h4">

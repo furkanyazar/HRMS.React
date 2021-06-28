@@ -13,9 +13,9 @@ export default function EditAdminDetail() {
   const history = useHistory();
 
   const initialValues = {
-    name: userItems[0].user.name,
-    surname: userItems[0].user.surname,
-    email: userItems[0].user.email,
+    name: userItems.user.name,
+    surname: userItems.user.surname,
+    email: userItems.user.email,
   };
 
   const schema = Yup.object({
@@ -32,10 +32,10 @@ export default function EditAdminDetail() {
         initialValues={initialValues}
         validationSchema={schema}
         onSubmit={(values) => {
-          userService.editAdmin(values, userItems[0].user.id).then((result) => {
+          userService.editAdmin(values, userItems.user.id).then((result) => {
               alert(result.data.message);
               if (result.data.success) {
-                  history.push("/admindetail/" + userItems[0].user.id);
+                  history.push("/admindetail/" + userItems.user.id);
               }
           })
         }}

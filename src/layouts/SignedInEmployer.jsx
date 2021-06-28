@@ -20,9 +20,9 @@ export default function SignedInEmployer() {
 
   useEffect(() => {
     userService
-      .getPhotosByUser(userItems[0].user.id)
+      .getPhotosByUser(userItems.user.id)
       .then((result) => setPhotos(result.data.data));
-  }, [userItems[0].user.id]);
+  }, [userItems.user.id]);
 
   return (
     <div>
@@ -36,12 +36,12 @@ export default function SignedInEmployer() {
         />
         <Dropdown
           pointing="top right"
-          text={userItems[0].user.user.companyName}
+          text={userItems.user.user.companyName}
         >
           <Dropdown.Menu>
             <Dropdown.Item
               as={Link}
-              to={"/employerdetail/" + userItems[0].user.user.id}
+              to={"/employerdetail/" + userItems.user.user.id}
               text="Bilgilerim"
               icon="info"
             />

@@ -13,10 +13,10 @@ export default function EditEmployerDetail() {
   const history = useHistory();
 
   const initialValues = {
-    companyName: userItems[0].user.user.companyName,
-    website: userItems[0].user.user.website,
-    email: userItems[0].user.user.email,
-    phoneNumber: userItems[0].user.user.phoneNumber,
+    companyName: userItems.user.user.companyName,
+    website: userItems.user.user.website,
+    email: userItems.user.user.email,
+    phoneNumber: userItems.user.user.phoneNumber,
   };
 
   const schema = Yup.object({
@@ -35,11 +35,11 @@ export default function EditEmployerDetail() {
         validationSchema={schema}
         onSubmit={(values) => {
           userService
-            .editEmployer(values, userItems[0].user.user.id)
+            .editEmployer(values, userItems.user.user.id)
             .then((result) => {
               alert(result.data.message);
               if (result.data.success) {
-                history.push("/employerdetail/" + userItems[0].user.user.id);
+                history.push("/employerdetail/" + userItems.user.user.id);
               }
             });
         }}

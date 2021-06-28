@@ -20,9 +20,9 @@ export default function SignedInAdmin() {
 
   useEffect(() => {
     userService
-      .getPhotosByUser(userItems[0].user.id)
+      .getPhotosByUser(userItems.user.id)
       .then((result) => setPhotos(result.data.data));
-  }, [userItems[0].user.id]);
+  }, [userItems.user.id]);
 
   return (
     <div>
@@ -34,9 +34,9 @@ export default function SignedInAdmin() {
           circular
           key={photos.id}
         />
-        <Dropdown pointing="top right" text={userItems[0].user.name}>
+        <Dropdown pointing="top right" text={userItems.user.name}>
           <Dropdown.Menu>
-            <Dropdown.Item as={Link} to={"/admindetail/" + userItems[0].user.id} text="Bilgilerim" icon="info" />
+            <Dropdown.Item as={Link} to={"/admindetail/" + userItems.user.id} text="Bilgilerim" icon="info" />
             <Dropdown.Item
               onClick={() => handleLogOut()}
               text="Çıkış Yap"

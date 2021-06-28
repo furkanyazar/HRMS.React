@@ -2,6 +2,9 @@ import React from "react";
 import { Route } from "react-router";
 import { Grid } from "semantic-ui-react";
 import AddJob from "../pages/AddJob";
+import AddLanguage from "../pages/AddLanguage";
+import AddSchool from "../pages/AddSchool";
+import AddSkill from "../pages/AddSkill";
 import AdminDetail from "../pages/AdminDetail";
 import AdminLogIn from "../pages/AdminLogIn";
 import ConfirmAds from "../pages/ConfirmAds";
@@ -49,6 +52,9 @@ export default function Dashboard() {
           <Route exact path="/editadminpassword/:id" component={EditAdminPassword} />
           <Route exact path="/edituserpassword/:id" component={EditUserPassword} />
           <Route exact path="/editemployerpassword/:id" component={EditEmployerPassword} />
+          <Route exact path="/addschool/:id" component={AddSchool} />
+          <Route exact path="/addlanguage/:id" component={AddLanguage} />
+          <Route exact path="/addskill/:id" component={AddSkill} />
         </Grid.Column>
       </Grid>
     </div>

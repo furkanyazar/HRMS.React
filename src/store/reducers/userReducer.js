@@ -15,24 +15,24 @@ export default function userReducer(state = initialState, { type, payload }) {
     case LOG_IN_ADMIN:
       return {
         ...state,
-        userItems: [{ user: payload, type: "admin" }],
+        userItems: { user: payload, type: "admin" },
       };
 
     case LOG_IN_EMPLOYER:
       return {
         ...state,
-        userItems: [{ user: payload, type: "employer" }],
+        userItems: { user: payload, type: "employer" },
       };
 
     case LOG_IN_USER:
       return {
         ...state,
-        userItems: [{ user: payload, type: "user" }],
+        userItems: { user: payload, type: "user" },
       };
 
     case LOG_OUT:
       return {
-        userItems: [{ user: {}, type: "logout" }],
+        userItems: { user: {}, type: "logout" },
       };
     default:
       return state;

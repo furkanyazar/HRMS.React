@@ -4,10 +4,11 @@ import { Icon, Menu, Table, Button } from "semantic-ui-react";
 import JobPostingService from "../services/jobPostingService";
 
 export default function Home() {
+  let jobPostingService = new JobPostingService();
+
   const [jobPostings, setJobPostings] = useState([]);
 
   useEffect(() => {
-    let jobPostingService = new JobPostingService();
     jobPostingService
       .getJobPostings()
       .then((result) => setJobPostings(result.data.data));

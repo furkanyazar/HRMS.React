@@ -27,6 +27,24 @@ export default function UserDetail() {
   const [photos, setPhotos] = useState({});
   const { userItems } = useSelector((state) => state.user);
 
+  const handleRemoveEducation = (id) => {
+    userService
+      .deleteEducation(id)
+      .then((result) => alert(result.data.message));
+  };
+
+  const handleRemoveLanguage = (id) => {
+    userService
+      .deleteLanguage(id)
+      .then((result) => alert(result.data.message));
+  };
+
+  const handleRemoveSkill = (id) => {
+    userService
+      .deleteSkill(id)
+      .then((result) => alert(result.data.message));
+  };
+
   useEffect(() => {
     userService
       .getEmployeeById(id)
@@ -99,8 +117,8 @@ export default function UserDetail() {
                 </Card.Meta>
               </Grid.Column>
               <Grid.Column width={4}>
-                {userItems[0].type === "user" &&
-                  employee.id === userItems[0].user.id && (
+                {userItems.type === "user" &&
+                  employee.id === userItems.user.id && (
                     <Button
                       color="yellow"
                       floated="right"
@@ -126,7 +144,10 @@ export default function UserDetail() {
                   <Table.Row>
                     <Table.Cell>
                       <Header as="h4" image>
-                        <Header.Content><Icon name="male" />Ad</Header.Content>
+                        <Header.Content>
+                          <Icon name="male" />
+                          Ad
+                        </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>{employee.name}</Table.Cell>
@@ -135,7 +156,10 @@ export default function UserDetail() {
                   <Table.Row>
                     <Table.Cell>
                       <Header as="h4" image>
-                        <Header.Content><Icon name="male" />Soyad</Header.Content>
+                        <Header.Content>
+                          <Icon name="male" />
+                          Soyad
+                        </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>{employee.surname}</Table.Cell>
@@ -144,7 +168,10 @@ export default function UserDetail() {
                   <Table.Row>
                     <Table.Cell>
                       <Header as="h4" image>
-                        <Header.Content><Icon name="calendar alternate" />Doğum Tarihi</Header.Content>
+                        <Header.Content>
+                          <Icon name="calendar alternate" />
+                          Doğum Tarihi
+                        </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>{formatDate(employee.dateOfBirth)}</Table.Cell>
@@ -153,17 +180,23 @@ export default function UserDetail() {
                   <Table.Row>
                     <Table.Cell>
                       <Header as="h4" image>
-                        <Header.Content><Icon name="mail" />E-posta</Header.Content>
+                        <Header.Content>
+                          <Icon name="mail" />
+                          E-posta
+                        </Header.Content>
                       </Header>
                     </Table.Cell>
                     <Table.Cell>{employee.email}</Table.Cell>
                   </Table.Row>
-                  {userItems[0].type === "user" &&
-                    employee.id === userItems[0].user.id && (
+                  {userItems.type === "user" &&
+                    employee.id === userItems.user.id && (
                       <Table.Row>
                         <Table.Cell>
                           <Header as="h4">
-                            <Header.Content><Icon name="key" />Şifre</Header.Content>
+                            <Header.Content>
+                              <Icon name="key" />
+                              Şifre
+                            </Header.Content>
                           </Header>
                         </Table.Cell>
                         <Table.Cell>
@@ -223,7 +256,12 @@ export default function UserDetail() {
       </Card.Group>
 
       <Card fluid>
-        <Card.Content header="Okuduğu Okullar" />
+        <Card.Content>
+          <Card.Header>Okuduğu Okullar</Card.Header>
+        </Card.Content>
+        <Button color="green" as={Link} to={"/addschool/" + userItems.user.id}>
+          Ekle
+        </Button>
         <Table celled color={"black"}>
           <Table.Header>
             <Table.Row>
@@ -231,6 +269,7 @@ export default function UserDetail() {
               <Table.HeaderCell>Bölüm</Table.HeaderCell>
               <Table.HeaderCell>Başlangıç Tarihi</Table.HeaderCell>
               <Table.HeaderCell>Mezuniyet Tarihi</Table.HeaderCell>
+              <Table.HeaderCell>Kaldır</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -240,7 +279,17 @@ export default function UserDetail() {
                 <Table.Cell>{school.school.name}</Table.Cell>
                 <Table.Cell>{school.department.name}</Table.Cell>
                 <Table.Cell>{formatDate(school.startingDate)}</Table.Cell>
-                <Table.Cell>{formatDate(school.endingDate)}</Table.Cell>
+                <Table.Cell>
+                  {school.endingDate !== null && formatDate(school.endingDate)}
+                </Table.Cell>
+                <Table.Cell>
+                  <Button
+                    color="red"
+                    onClick={() => handleRemoveEducation(school.id)}
+                  >
+                    Kaldır
+                  </Button>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -248,11 +297,21 @@ export default function UserDetail() {
       </Card>
 
       <Card fluid>
-        <Card.Content header="Yabancı Diller" />
+        <Card.Content>
+          <Card.Header>Yabancı Diller</Card.Header>
+        </Card.Content>
+        <Button
+          color="green"
+          as={Link}
+          to={"/addlanguage/" + userItems.user.id}
+        >
+          Ekle
+        </Button>
         <Table celled color={"black"}>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Dil Adı</Table.HeaderCell>
+              <Table.HeaderCell>Kaldır</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -260,6 +319,9 @@ export default function UserDetail() {
             {languages.map((language) => (
               <Table.Row key={language.language.id}>
                 <Table.Cell>{language.language.name}</Table.Cell>
+                <Table.Cell>
+                  <Button color="red" onClick={() => handleRemoveLanguage(language.id)}>Kaldır</Button>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>
@@ -267,11 +329,17 @@ export default function UserDetail() {
       </Card>
 
       <Card fluid>
-        <Card.Content header="Yazılım Teknolojileri" />
+        <Card.Content>
+          <Card.Header>Teknolojiler</Card.Header>
+        </Card.Content>
+        <Button color="green" as={Link} to={"/addskill/" + userItems.user.id}>
+          Ekle
+        </Button>
         <Table celled color={"black"}>
           <Table.Header>
             <Table.Row>
               <Table.HeaderCell>Teknoloji Adı</Table.HeaderCell>
+              <Table.HeaderCell>Kaldır</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
 
@@ -279,6 +347,9 @@ export default function UserDetail() {
             {skills.map((skill) => (
               <Table.Row key={skill.skill.id}>
                 <Table.Cell>{skill.skill.name}</Table.Cell>
+                <Table.Cell>
+                  <Button color="red" onClick={() => handleRemoveSkill(skill.id)}>Kaldır</Button>
+                </Table.Cell>
               </Table.Row>
             ))}
           </Table.Body>

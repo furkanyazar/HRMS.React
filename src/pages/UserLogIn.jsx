@@ -10,6 +10,7 @@ import { logInUser } from "../store/actions/userActions";
 
 export default function UserLogIn() {
   let userService = new UserService();
+
   const history = useHistory();
   const dispatch = useDispatch();
 

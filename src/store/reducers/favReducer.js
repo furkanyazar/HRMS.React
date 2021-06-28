@@ -8,15 +8,23 @@ const initialState = {
 export default function favReducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_TO_FAV:
-      return {
-        ...state,
-        favItems: [{ fav: payload }],
-      };
+      let fav = state.favItems.find((f) => f.fav.id === payload.id);
+
+      if (fav) {
+        return {
+          ...state,
+        };
+      } else {
+        return {
+          ...state,
+          favItems: [...state.favItems, { fav: payload }],
+        };
+      }
 
     case REMOVE_FROM_FAV:
       return {
         ...state,
-        favItems: state.favItems.filter((f) => f.jobPosting.id !== payload.id),
+        favItems: state.favItems.filter((f) => f.fav.id !== payload.id),
       };
 
     default:

@@ -44,7 +44,7 @@ export default function AdminDetail() {
           <Card.Header>{admin.name + " " + admin.surname}</Card.Header>
         </Grid.Column>
         <Grid.Column width={4}>
-          {userItems[0].type === "admin" && admin.id === userItems[0].user.id && (
+          {userItems.type === "admin" && admin.id === userItems.user.id && (
             <Button
               color="yellow"
               floated="right"
@@ -100,7 +100,7 @@ export default function AdminDetail() {
             </Table.Cell>
             <Table.Cell>{admin.email}</Table.Cell>
           </Table.Row>
-          {userItems[0].type === "admin" && admin.id === userItems[0].user.id && (
+          {userItems.type === "admin" && admin.id === userItems.user.id && (
             <Table.Row>
               <Table.Cell>
                 <Header as="h4">

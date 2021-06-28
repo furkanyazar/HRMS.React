@@ -1,1 +1,1 @@
-export const userItems = [{user: {}, type: "logout"}];
+export const userItems = {user: {}, type: "logout"};

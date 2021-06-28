@@ -48,7 +48,7 @@ export default function AddJob() {
     validationSchema: jobPostingSchema,
     onSubmit: (values) => {
       let postModel = {
-        user: { id: userItems[0].user.user.id },
+        user: { id: userItems.user.user.id },
         city: { id: values.city },
         job: { id: values.job },
         workingTime: { id: values.workingTime },
