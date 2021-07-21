@@ -11,6 +11,8 @@ import ConfirmAds from "../pages/ConfirmAds";
 import ConfirmAdsDetail from "../pages/ConfirmAdsDetail";
 import ConfirmEmployers from "../pages/ConfirmEmployers";
 import ConfirmEmployersDetail from "../pages/ConfirmEmployersDetail";
+import ConfirmEmployerUpdatesDetail from "../pages/ConfirmEmployerUpdatesDetail";
+import ConfirmEmployerUpdates from "../pages/ConfirmEmployerUpdates";
 import EditAdminDetail from "../pages/EditAdminDetail";
 import EditAdminPassword from "../pages/EditAdminPassword";
 import EditEmployerDetail from "../pages/EditEmployerDetail";
@@ -55,6 +57,8 @@ export default function Dashboard() {
           <Route exact path="/addschool/:id" component={AddSchool} />
           <Route exact path="/addlanguage/:id" component={AddLanguage} />
           <Route exact path="/addskill/:id" component={AddSkill} />
+          <Route exact path="/confirmemployerupdates" component={ConfirmEmployerUpdates} />
+          <Route exact path="/confirmemployerupdatesdetail/:id" component={ConfirmEmployerUpdatesDetail} />
         </Grid.Column>
       </Grid>
     </div>

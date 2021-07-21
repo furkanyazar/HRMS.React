@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Button, Header, Icon, Table } from "semantic-ui-react";
+import { Button, Header, Icon, Label, Table } from "semantic-ui-react";
 import UserService from "../services/userService";
 
-export default function ConfirmEmployerDetail() {
+export default function ConfirmEmployerUpdatesDetail() {
   let { id } = useParams();
   let userService = new UserService();
   const history = useHistory();
   const [employer, setEmployer] = useState({});
+  const [employerUpdated, setEmployerUpdated] = useState({});
 
   useEffect(() => {
     userService
       .getEmployerById(id)
       .then((result) => setEmployer(result.data.data));
+
+    userService
+      .getEmployerUpdated(id)
+      .then((result) => setEmployerUpdated(result.data.data));
   }, [id]);
 
   function activateEmployer(id) {
-    userService.setIsActivated(id);
-    alert("Kullanıcı onaylandı");
-    history.push("/confirmemployers");
+    userService.setIsUpdated(id);
+    alert("Güncelleme onaylandı");
+    history.push("/confirmemployerupdates");
   }
 
   return (
@@ -41,7 +46,7 @@ export default function ConfirmEmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell>{employer.companyName}</Table.Cell>
+            <Table.Cell>{employer.companyName} <Icon name="arrow right" /> {employerUpdated.companyName}</Table.Cell>
           </Table.Row>
 
           <Table.Row>
@@ -53,7 +58,7 @@ export default function ConfirmEmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell>{employer.website}</Table.Cell>
+            <Table.Cell>{employer.website} <Icon name="arrow right" /> {employerUpdated.website}</Table.Cell>
           </Table.Row>
 
           <Table.Row>
@@ -65,7 +70,7 @@ export default function ConfirmEmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell>{employer.email}</Table.Cell>
+            <Table.Cell>{employer.email} <Icon name="arrow right" /> {employerUpdated.email}</Table.Cell>
           </Table.Row>
 
           <Table.Row>
@@ -77,7 +82,7 @@ export default function ConfirmEmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell>{employer.phoneNumber}</Table.Cell>
+            <Table.Cell>{employer.phoneNumber} <Icon name="arrow right" /> {employerUpdated.phoneNumber}</Table.Cell>
           </Table.Row>
 
           <Table.Row>
@@ -89,7 +94,11 @@ export default function ConfirmEmployerDetail() {
                 </Header.Content>
               </Header>
             </Table.Cell>
-            <Table.Cell><Button onClick={() => activateEmployer(employer.id)}>Onayla</Button></Table.Cell>
+            <Table.Cell>
+              <Button onClick={() => activateEmployer(employer.id)}>
+                Onayla
+              </Button>
+            </Table.Cell>
           </Table.Row>
         </Table.Body>
       </Table>

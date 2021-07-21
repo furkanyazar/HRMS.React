@@ -36,6 +36,13 @@ export default function Navi() {
                 to={"/confirmemployers"}
               />
             )}
+            {userItems.type === "admin" && (
+              <Menu.Item
+                name="firma değişiklikleri"
+                as={Link}
+                to={"/confirmemployerupdates"}
+              />
+            )}
           </Menu.Menu>
 
           <Menu.Menu position="right">

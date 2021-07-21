@@ -5,17 +5,25 @@ import * as Yup from "yup";
 import { useHistory } from "react-router-dom";
 import HrmsTextInput from "../utilities/customFormControls/HrmsTextInput";
 import UserService from "../services/userService";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { logInUser } from "../store/actions/userActions";
+import JobPostingService from "../services/jobPostingService";
+import { addToFav } from "../store/actions/favActions";
 
 export default function UserLogIn() {
   let userService = new UserService();
+  let jobPostingService = new JobPostingService();
 
   const history = useHistory();
   const dispatch = useDispatch();
 
   const handleUserLogIn = (user) => {
     dispatch(logInUser(user));
+    jobPostingService.getFavs(user.id).then((result) => {
+      result.data.data.forEach((fav) => {
+        dispatch(addToFav(fav));
+      });
+    });
   };
 
   const initialValues = {

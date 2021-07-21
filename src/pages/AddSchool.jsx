@@ -16,7 +16,7 @@ export default function AddSchool() {
   const [departments, setDepartments] = useState([]);
   const { userItems } = useSelector((state) => state.user);
 
-  if (id != userItems.user.id) {
+  if (id !== userItems.user.id) {
     history.push("/");
   }
 
@@ -45,7 +45,7 @@ export default function AddSchool() {
     onSubmit: (values) => {
       let isEndDateNull = true;
 
-      if (values.endingDate != "") {
+      if (values.endingDate !== "") {
         isEndDateNull = false;
       }
 

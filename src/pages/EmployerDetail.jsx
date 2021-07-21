@@ -7,6 +7,7 @@ import {
   Header,
   Icon,
   Image,
+  Label,
   Table,
 } from "semantic-ui-react";
 import UserService from "../services/userService";
@@ -19,6 +20,7 @@ export default function EmployerDetail() {
   let jobPostingService = new JobPostingService();
 
   const [employer, setEmployer] = useState({});
+  const [employerUpdated, setEmployerUpdated] = useState({});
   const [jobAds, setJobAds] = useState([]);
   const [photos, setPhotos] = useState({});
   const { userItems } = useSelector((state) => state.user);
@@ -35,6 +37,10 @@ export default function EmployerDetail() {
     jobPostingService
       .getByIsActivatedAndUserId(id)
       .then((result) => setJobAds(result.data.data));
+
+    userService
+      .getEmployerUpdated(id)
+      .then((result) => setEmployerUpdated(result.data.data));
   }, [id]);
 
   return (
@@ -57,7 +63,8 @@ export default function EmployerDetail() {
         </Grid.Column>
         <Grid.Column width={4}>
           {userItems.type === "employer" &&
-            employer.id === userItems.user.user.id && (
+            employer.id === userItems.user.user.id &&
+            employerUpdated === null && (
               <Button
                 color="yellow"
                 floated="right"
@@ -66,6 +73,11 @@ export default function EmployerDetail() {
               >
                 Düzenle
               </Button>
+            )}
+          {userItems.type === "employer" &&
+            employer.id === userItems.user.user.id &&
+            employerUpdated !== null && (
+              <Label>Güncelleme için onay bekleniyor</Label>
             )}
         </Grid.Column>
       </Grid>

@@ -14,15 +14,17 @@ export default class UserService {
   }
 
   deleteEducation(id) {
-    return axios.post("http://localhost:8080/api/educations/remove?id=" + id)
+    return axios.post("http://localhost:8080/api/educations/remove?id=" + id);
   }
 
   deleteLanguage(id) {
-    return axios.post("http://localhost:8080/api/knownlanguages/remove?id=" + id)
+    return axios.post(
+      "http://localhost:8080/api/knownlanguages/remove?id=" + id
+    );
   }
 
   deleteSkill(id) {
-    return axios.post("http://localhost:8080/api/ownedskills/remove?id=" + id)
+    return axios.post("http://localhost:8080/api/ownedskills/remove?id=" + id);
   }
 
   logInAdmin(values) {
@@ -85,9 +87,9 @@ export default class UserService {
     );
   }
 
-  editEmployer(values, id) {
+  editEmployer(values, userId) {
     return axios.post(
-      "http://localhost:8080/api/employers/edit?id=" + id,
+      "http://localhost:8080/api/updates/add?userId=" + userId,
       values
     );
   }
@@ -100,6 +102,10 @@ export default class UserService {
     return axios.get("http://localhost:8080/api/employers/findbyid?id=" + id);
   }
 
+  getEmployerUpdated(id) {
+    return axios.get("http://localhost:8080/api/updates/findbyuserid?userId=" + id);
+  }
+
   getAdminById(id) {
     return axios.get("http://localhost:8080/api/staffs/findbyuserid?id=" + id);
   }
@@ -110,12 +116,20 @@ export default class UserService {
     );
   }
 
+  getUpdates() {
+    return axios.get("http://localhost:8080/api/updates/getall");
+  }
+
   setIsActivated(id) {
     return axios.post(
       "http://localhost:8080/api/employers/setIsActivated?id=" +
         id +
         "&isActivated=true"
     );
+  }
+
+  setIsUpdated(id) {
+    return axios.post("http://localhost:8080/api/updates/edit?userId=" + id);
   }
 
   getEmployees() {

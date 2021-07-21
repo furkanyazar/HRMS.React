@@ -25,15 +25,17 @@ export default function Favs() {
           {favItems.map((favItem) => (
             <Dropdown.Item
               as={Link}
-              to={"/jobdetail/" + favItem.fav.id}
+              to={"/jobdetail/" + favItem.fav.jobPosting.id}
               key={favItem.fav.id}
             >
-              {favItem.fav.job.name + " in " + favItem.fav.user.companyName}{" "}
+              {favItem.fav.jobPosting.job.name +
+                " in " +
+                favItem.fav.jobPosting.user.companyName}{" "}
               <Label
                 onClick={() =>
                   handleRemoveFromFav(
                     favItem.fav,
-                    favItem.fav.id,
+                    favItem.fav.jobPosting.id,
                     userItems.user.id
                   )
                 }
