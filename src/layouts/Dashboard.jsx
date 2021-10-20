@@ -34,6 +34,7 @@ export default function Dashboard() {
       <Grid>
         <Grid.Column width={16}>
           <Route exact path="/" component={Home} />
+          <Route exact path="/home/:city/:workingTime" component={Home} />
           <Route exact path="/adminlogin" component={AdminLogIn} />
           <Route exact path="/employerlogin" component={EmployerLogIn} />
           <Route exact path="/employerregister" component={EmployerRegister} />

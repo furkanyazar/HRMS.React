@@ -8,7 +8,7 @@ const initialState = {
 export default function favReducer(state = initialState, { type, payload }) {
   switch (type) {
     case ADD_TO_FAV:
-      let fav = state.favItems.find((f) => f.fav.id === payload.id);
+      let fav = state.favItems.find((f) => f.fav.jobPosting.id === payload.id);
 
       if (fav) {
         return {

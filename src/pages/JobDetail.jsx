@@ -15,11 +15,18 @@ export default function JobDetail() {
   const { userItems } = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  const handleAddToFav = (jobAd) => {
-    dispatch(addToFav(jobAd));
+  const handleAddToFav = () => {
     jobPostingService.addToFav(id, userItems.user.id).then((result) => {
       alert(result.data.message);
-    })
+
+      if (result.data.success) {
+        jobPostingService.getFavs(userItems.user.id).then((result) => {
+          result.data.data.forEach((fav) => {
+            dispatch(addToFav(fav));
+          });
+        });
+      }
+    });
   };
 
   useEffect(() => {
@@ -102,7 +109,7 @@ export default function JobDetail() {
                         </Header>
                       </Table.Cell>
                       <Table.Cell>
-                        <Button primary onClick={() => handleAddToFav(jobAd)}>
+                        <Button primary onClick={() => handleAddToFav()}>
                           <Button.Content>Favorilere Ekle</Button.Content>
                         </Button>
                       </Table.Cell>

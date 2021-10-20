@@ -64,4 +64,16 @@ export default class JobPostingService {
     return axios.get("http://localhost:8080/api/favorites/getfavs?id=" + userId);
   }
 
+  getByCity(cityId) {
+    return axios.get("http://localhost:8080/api/jobPostings/getbyisactivatedandcity?city=" + cityId + "&isActivated=true");
+  }
+
+  getByWorkingTime(workingTimeId) {
+    return axios.get("http://localhost:8080/api/jobPostings/getbyisactivatedandworkingtime?isActivated=true&workingTime=" + workingTimeId);
+  }
+
+  getByCityAndWorkingTime(cityId, workingTimeId) {
+    return axios.get("http://localhost:8080/api/jobPostings/getbyisactivatedandcityandworkingtime?city=" + cityId + "&isActivated=true&workingTime=" + workingTimeId);
+  }
+
 }

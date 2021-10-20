@@ -14,7 +14,7 @@ export default function AddLanguage() {
   const [languages, setLanguages] = useState([]);
   const { userItems } = useSelector((state) => state.user);
 
-  if (id !== userItems.user.id) {
+  if (id != userItems.user.id) {
     history.push("/");
   }
 
