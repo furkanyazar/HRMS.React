@@ -65,7 +65,7 @@ export default function Sidebar() {
       <Menu vertical>
         <Menu.Item>
           <Form.Field>
-            <label>Şehir</label>
+            {/* <label>Şehir</label> */}
             <Dropdown
               // clearable
               item
@@ -89,7 +89,7 @@ export default function Sidebar() {
         </Menu.Item>
         <Menu.Item>
           <Form.Field>
-            <label>Çalışma Süresi</label>
+            {/* <label>Çalışma Süresi</label> */}
             <Dropdown
               // clearable
               item
